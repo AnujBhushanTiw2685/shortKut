@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Shotrten url server",
   "main": "index.js",
+  "type": "module",
   "engines": {
     "node": "16.15.0",
     "npm": "8.10.0"
