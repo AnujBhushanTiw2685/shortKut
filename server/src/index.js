@@ -1,18 +1,28 @@
-const express = require('express');
-const redirect = require('./controllers/redirects.controller');
-const url = require('./controllers/url.controller');
-var cors = require('cors');
+import express from "express";
+import redirect from "./controllers/redirects.controller";
+import url from "./controllers/url.controller";
+import cors from "cors";
 
 const app = express();
-app.use(cors());
+
+const corsOptions = {
+    origin: [
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "https://short-kut.vercel.app/", // <-- Add your Vercel URL here
+    ],
+    credentials: true,
+    optionSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.status(200).json({ Message: 'Hi there' });
+app.get("/", (req, res) => {
+    res.status(200).json({ Message: "Hi there" });
 });
 
-app.use('/', redirect);
-app.use('/api/url', url);
+app.use("/", redirect);
+app.use("/api/url", url);
 
-
-module.exports = app;
+export default app;
